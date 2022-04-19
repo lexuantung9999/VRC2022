@@ -4,7 +4,7 @@
 
 DCMotor VRC_DCMotor;
 char command;
-int cmd_vel = BASE_VEL;
+int cmd_vel = BASE_VEL; // minimum speed robot can be moved
 unsigned long time;
 
 void setup() {
