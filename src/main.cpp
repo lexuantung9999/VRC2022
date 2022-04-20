@@ -12,7 +12,8 @@ void setup() {
   VRC_DCMotor.Init();
   Serial1.begin(115200);
   Serial.begin(115200);
-  pinMode(END_STOP_LIFT_DOWN, INPUT_PULLUP)
+  pinMode(END_STOP_LIFT_DOWN, INPUT_PULLUP); 
+  pinMode(END_STOP_LIFT_UP, INPUT_PULLUP);
 }
 
 void loop() {
@@ -46,6 +47,19 @@ void loop() {
       case PS2_L3:
         cmd_vel = BASE_VEL;
         break;
+      case PS2_R1:
+        if(digitalRead(END_STOP_LIFT_UP) != 0 ){
+          Serial.println("Lift Up"); // Control Lift Up
+        }
+        break;
+      case PS2_R2:
+        if (digitalRead(END_STOP_LIFT_DOWN) != 0){
+          Serial.println("Lift Down");
+        }
+        break;
+      case PS2_R3:
+        Serial.println("Lift Stop");
+        break;
     }
     time = millis();
   }
@@ -54,5 +68,11 @@ void loop() {
         VRC_DCMotor.Stop(2);
         VRC_DCMotor.Stop(4);
   }
+
+  if(digitalRead(END_STOP_LIFT_UP) == 0 || digitalRead(END_STOP_LIFT_DOWN)==0){
+    Serial.println("Lift Stop");
+  }
+
+
 
 }

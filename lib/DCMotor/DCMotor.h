@@ -26,6 +26,12 @@
 #define M4_IO1  45
 #define M4_IO2  44
 
+#define LIFT_UP     1
+#define LIFT_DOWN   -1
+#define LIFT_STOP   0
+
+
+
 class DCMotor
 {
 private:
@@ -34,6 +40,8 @@ public:
     void Init();
     void Run(int motor_number, int pwm, bool dir);
     void Stop(int motor_number);
+    void Lift(int status, int pwm); //up, down or stop
+
 };
 
 

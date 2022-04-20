@@ -1,5 +1,6 @@
 #include <DCMotor.h>
 
+
 void DCMotor::Init(){
     pinMode(M1_PWM, OUTPUT); pinMode(M2_PWM, OUTPUT); pinMode(M3_PWM, OUTPUT); pinMode(M4_PWM, OUTPUT);
     pinMode(M1_IO1,OUTPUT); pinMode(M1_IO2,OUTPUT); pinMode(M2_IO1,OUTPUT); pinMode(M2_IO2,OUTPUT);
@@ -53,5 +54,26 @@ void DCMotor::Stop(int motor_number){
             // digitalWrite(M4_IO2,bool(!dir));
             analogWrite(M4_PWM,0);
             break;
+    }
+}
+
+
+void DCMotor::Lift(int status, int pwm){
+    // fix lift_motor in Motor 3
+    DCMotor lift_motor;
+    switch (status)
+    {
+    case (LIFT_UP):
+        /* code */
+        lift_motor.Run(3,pwm,1);
+        break;
+    
+    case (LIFT_DOWN):
+        lift_motor.Run(3,pwm,0);
+        break;
+
+    case (LIFT_STOP):
+        lift_motor.Stop(3);
+        break;    
     }
 }
